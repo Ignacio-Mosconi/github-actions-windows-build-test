@@ -1,0 +1,25 @@
+name: Build & Deploy
+
+on:
+  push:
+    tags: 
+      - "[0-9]+.[0-9]+.[0-9]+-dev"
+      - "[0-9]+.[0-9]+.[0-9]+-test"
+      - "[0-9]+.[0-9]+.[0-9]+-prod"
+
+jobs:
+    buildAndDeployClient:
+      name: Build & deploy client
+      uses: ./.github/workflows/build-deploy-client.yml
+      secrets: inherit
+    
+    buildAndDeployServer:
+      name: Build & deploy server
+      uses: ./.github/workflows/build-deploy-server.yml
+      secrets: inherit
+    
+    notifyBuildUpload:
+      name: Notify build upload
+      uses: ./.github/workflows/notify-build-upload.yml
+      needs: [ buildAndDeployClient, buildAndDeployServer ]
+      secrets: inherit
