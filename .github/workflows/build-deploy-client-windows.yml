@@ -31,4 +31,4 @@ jobs:
             targetPlatform: ${{ env.BUILD_TARGET }}
             versioning: Tag
             buildMethod: Digi.EditorTools.BuildScript.Build
-            customParameters: -productType Client -environmentType Development -serverType Hosted
+            customParameters: '-productType Client -environmentType Development -serverType Hosted'
