@@ -6,11 +6,12 @@ on:
 env:
   BUILD_FULL_NAME: "${{ vars.CLIENT_BUILD_NAME }} ${{ github.ref_name }}"
   BUILD_TARGET: StandaloneWindows
+  CACHE_SERVER_ENDPOINT: 15.228.28.195:8443
 
 jobs:
     buildAndDeployClient:
       name: Build & deploy
-      runs-on: windows-2019
+      runs-on: ubuntu-latest
       steps:
         
         # Checkouts the current repository
@@ -31,4 +32,4 @@ jobs:
             targetPlatform: ${{ env.BUILD_TARGET }}
             versioning: Tag
             buildMethod: Digi.EditorTools.BuildScript.Build
-            customParameters: '-productType Client -environmentType Development -serverType Hosted'
+            customParameters: -cacheServerEndpoint ${{ env.CACHE_SERVER_ENDPOINT }} -cacheServerEnableDownload true -productType Client -environmentType Development -serverType Hosted
