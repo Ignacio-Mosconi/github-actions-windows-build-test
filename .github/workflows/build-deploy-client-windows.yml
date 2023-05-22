@@ -10,7 +10,7 @@ env:
 jobs:
     buildAndDeployClient:
       name: Build & deploy
-      runs-on: ubuntu-latest
+      runs-on: windows-2019
       steps:
         
         # Checkouts the current repository
@@ -36,7 +36,7 @@ jobs:
                               -cacheServerEndpoint 54.94.38.152:8443
                               -cacheServerNamespacePrefix MyProject
                               -cacheServerEnableDownload true
-                              -cacheServerEnableDownload false
+                              -cacheServerEnableUpload false
                               -productType Client 
                               -environmentType Development
                               -serverType Hosted
