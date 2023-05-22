@@ -6,7 +6,6 @@ on:
 env:
   BUILD_FULL_NAME: "${{ vars.CLIENT_BUILD_NAME }} ${{ github.ref_name }}"
   BUILD_TARGET: StandaloneWindows
-  CACHE_SERVER_ENDPOINT: 15.228.28.195:8443
 
 jobs:
     buildAndDeployClient:
@@ -32,4 +31,12 @@ jobs:
             targetPlatform: ${{ env.BUILD_TARGET }}
             versioning: Tag
             buildMethod: Digi.EditorTools.BuildScript.Build
-            customParameters: -cacheServerEndpoint ${{ env.CACHE_SERVER_ENDPOINT }} -cacheServerEnableDownload true -productType Client -environmentType Development -serverType Hosted
+            customParameters: -adb2 
+                              -enableCacheServer
+                              -cacheServerEndpoint 54.94.38.152:8443
+                              -cacheServerNamespacePrefix MyProject
+                              -cacheServerEnableDownload true
+                              -cacheServerEnableDownload false
+                              -productType Client 
+                              -environmentType Development
+                              -serverType Hosted
