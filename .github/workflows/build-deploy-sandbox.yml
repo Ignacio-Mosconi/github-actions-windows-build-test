@@ -35,17 +35,14 @@ jobs:
             customParameters: -productType Client 
                               -environmentType Development
                               -serverType Hosted
-
-        - name: Print build version
-          run: |
-            echo "${{ steps.build.outputs.buildVersion }}"
         
         - name: Check build success
-          if: ${{ steps.build.outputs.buildVersion == '' }}
-          run: |
-            echo "Aborting the job..."
-            exit 1
+          id: checkBuildSuccess
+          run: bash ${GITHUB_WORKSPACE}/.github/scripts/common/check-build-success.sh
+          env:
+            BUILD_TARGET: ${{ env.BUILD_TARGET }}
         
         - name: Post build placeholder
+          if: ${{ steps.checkBuildSuccess.outputs.buildSucceeded == true }}
           run: |
             echo "The job continues..."
