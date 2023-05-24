@@ -1,5 +1,14 @@
 #!/bin/bash
 
-buildSucceeded=$([ -d "build/$BUILD_TARGET" ])
+buildSucceeded=false
 
-echo "$buildSucceeded" >> "$GITHUB_OUTPUT"
+if [ -d "build/$BUILD_TARGET" ]
+then
+    echo "Success!"
+    buildSucceeded=true;
+else
+    echo "Failure!"
+    buildSucceeded=false;
+fi
+
+ echo "buildSucceeded=$buildSucceeded" >> $GITHUB_OUTPUT
