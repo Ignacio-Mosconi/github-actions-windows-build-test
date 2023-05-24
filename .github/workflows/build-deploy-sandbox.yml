@@ -36,8 +36,16 @@ jobs:
                               -environmentType Development
                               -serverType Hosted
 
-        - name: Post build placeholder
-          if: steps.build.outputs.buildVersion != ""
+        - name: Print build version
           run: |
-            echo "The build was successful"
             echo "${{ steps.build.outputs.buildVersion }}"
+        
+        - name: Check build success
+          if: ${{ steps.build.outputs.buildVersion == '' }}
+          run: |
+            echo "Aborting the job..."
+            exit 1
+        
+        - name: Post build placeholder
+          run: |
+            echo "The job continues..."
