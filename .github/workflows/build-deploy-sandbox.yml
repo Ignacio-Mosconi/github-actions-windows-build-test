@@ -30,7 +30,7 @@ jobs:
           with:
             buildName: "${{ env.BUILD_FULL_NAME }}"
             targetPlatform: ${{ env.BUILD_TARGET }}
-            versioning: Tag
+            versioning: None
             buildMethod: Digi.EditorTools.BuildScript.Build
             customParameters: -productType Client 
                               -environmentType Development
